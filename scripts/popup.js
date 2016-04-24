@@ -65,7 +65,7 @@ window.onload = function() {
 
   document.getElementById('filter').addEventListener('keyup', function(e) {
     var rows = document.querySelectorAll('#lists li');
-    var reg = new RegExp(e.target.value);
+    var reg = new RegExp(e.target.value, 'i');
 
     for (var i=0; i<rows.length; i++) {
       var link = rows[i].querySelector('.link');
