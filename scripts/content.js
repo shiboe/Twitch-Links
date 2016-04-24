@@ -13,9 +13,8 @@ var port = null;
 // main loop
 
 function checkLines() {
-  console.log('checkLines');  
   if (chatUnavailable()) {
-    reset();
+    reset(true);
     scheduleNext();
     return;
   }
@@ -36,6 +35,9 @@ function checkLines() {
         urls: urlQueue
       });
       urlQueue = [];
+    }
+    else {
+      reset();
     }
 
     scheduleNext();
@@ -72,9 +74,11 @@ function chatUnavailable() {
   return noChatContainer || chatContainerDetached;
 }
 
-function reset() {
+function reset(hard) {
   chatLines = document.querySelector('.chat-lines');
-  lastLine = null;
+  if (hard) {
+    lastLine = null;
+  }
 }
 
 function scheduleNext() {
