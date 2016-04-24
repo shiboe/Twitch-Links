@@ -15,11 +15,17 @@ function createLine(urlObj) {
   link.classList.add('link');
   link.title = urlObj.url;
 
-  move.onclick = function() {
+  function click() {
     urlObj.ignore = !urlObj.ignore;
 
     var moveTo = urlObj.ignore ? ignoreUrls : activeUrls;
     moveTo.insertBefore(newLine, moveTo.firstChild);
+  }
+
+  move.onclick = click;
+
+  if (!urlObj.ignore) {
+    link.onclick = click;
   }
 
   newLine.appendChild(move);
@@ -30,6 +36,7 @@ function createLine(urlObj) {
 
 function loadLinks() {
   var background = chrome.extension.getBackgroundPage();
+  var hasHidden = false;
 
   if (background.urlData.length) {
     document.body.classList.add('has-links');
@@ -38,8 +45,16 @@ function loadLinks() {
       var line = createLine(urlObj);
       var container = urlObj.ignore ? ignoreUrls : activeUrls;
 
+      if (urlObj.ignore) {
+        hasHidden = true;
+      }
+
       container.insertBefore(line, container.firstChild);
     });
+
+    if (!hasHidden) {
+      document.body.classList.add('has-no-hidden');
+    }
   }
 }
 
@@ -72,5 +87,9 @@ window.onload = function() {
       var match = reg.test(link.getAttribute('href'));
       rows[i].classList[!match ? 'add':'remove']('no-match');
     }
+  });
+
+  document.getElementById('show-hidden').addEventListener('click', function(e) {
+    document.body.classList.add('show-hidden');
   });
 }

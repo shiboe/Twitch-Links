@@ -14,7 +14,11 @@ li .move:hover { background-color: #7B3EC3; color: white !important; }
 
 a { cursor: pointer; outline: none !important; }
 
-#ignore-urls { margin-top: 6px; }
+#ignore-urls { margin-top: 6px; display:none; }
+.show-hidden #ignore-urls { display:block; }
+.show-hidden #show-hidden,
+.has-no-hidden #show-hidden { display:none; }
+
 
 #active-urls .fa-arrow-up { display: none; }
 #ignore-urls .fa-arrow-down { display: none; }
