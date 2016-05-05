@@ -1,6 +1,6 @@
 body { margin: 0; padding: 0; width: 360px; }
 
-#lists { max-height: 400px; overflow: scroll; text-align: center; }
+#lists { max-height: 400px; overflow: auto; text-align: center; }
 
 ul { margin: 0; padding: 0; list-style: none; display: none; text-align: left; }
 li { margin: 0; padding: 0; border-bottom:1px solid white; }
@@ -35,10 +35,11 @@ a { cursor: pointer; outline: none !important; }
 .has-links ul,
 .has-links #filter { display: block; }
 
-.button { color: #F5F5F5; background-color: lightgrey; padding:2px 6px; border-radius:6px; text-decoration: none; margin: 6px; display: inline-block; }
+.button { color: #F5F5F5; background-color: lightgrey; padding:4px 10px; border-radius:6px; text-decoration: none; margin: 6px; display: inline-block; }
 .button:hover { color: white; background-color: #7B3EC3; }
-.button i { font-size:16px !important; vertical-align: middle; }
-.button span { vertical-align: middle; }
+
+.button i { display:inline-block; margin-right:2px; }
+.button span { display:inline-block; }
 
 .button.left { float: left; }
 .button.right { float: right; }
