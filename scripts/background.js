@@ -10,9 +10,11 @@ function addNewUrls(sentUrls) {
   var before = urls.length;
 
   sentUrls.forEach(function(url) {
-    if (urls.indexOf(url) == -1) {
-      urls.push(url);
-      urlData.push(new urlDataObj(url));
+    var normalizedUrl = normalize(url);
+
+    if (urls.indexOf(normalizedUrl) == -1) {
+      urls.push(normalizedUrl);
+      urlData.push(new urlDataObj(normalizedUrl));
     }
   });
 
@@ -22,6 +24,27 @@ function addNewUrls(sentUrls) {
 function urlDataObj(url) {
   this.url = url;
   this.ignore = false;
+}
+
+function normalize(url) {
+  var repeats = url.split(/https?:\/\//).splice(1);
+  var ssl = url[4] === 's';
+  var first = repeats.pop();
+
+  if (repeats.length) {
+    while (repeats.length) {
+      var next = repeats.pop();
+      if (next !== first) {
+        return url;
+      }
+    }
+
+    if (repeats.length === 0) {
+      url = 'http' + (ssl?'s':'') + '://' + first;
+    }
+  }
+
+  return url;
 }
 
 
