@@ -15,7 +15,7 @@ class Status
       statusEls.forEach (status) ->
         status.classList.remove 'show-status'
 
-      if false and (now - @lastCheckin) < @deadLimit
+      if (now - @lastCheckin) < @deadLimit
         document.querySelector('#twitchlinks-status .alive').classList.add 'show-status'
 
       else

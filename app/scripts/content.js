@@ -7045,7 +7045,7 @@ Status = (function() {
       statusEls.forEach(function(status) {
         return status.classList.remove('show-status');
       });
-      if (false && (now - this.lastCheckin) < this.deadLimit) {
+      if ((now - this.lastCheckin) < this.deadLimit) {
         return document.querySelector('#twitchlinks-status .alive').classList.add('show-status');
       } else {
         if (this.fails < 3) {
