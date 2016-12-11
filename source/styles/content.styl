@@ -1,0 +1,282 @@
+PURPLE = #6441a4
+
+#twitchlinks-dropdown
+  position absolute
+  top 0
+  right 0
+
+#twitchlinks-expand-button
+  position absolute
+  z-index 999
+  top 10px
+  right 20px
+  padding 0 10px
+  font-size 16px
+  cursor pointer
+
+#twitchlinks-notif-count
+  position absolute
+  top 0
+  right 0
+  background-color #fc3636
+  color #fff
+  font-size 9px
+  line-height 12px
+  text-align center
+  padding 0 3px
+  width auto
+  height 12px
+  vertical-align middle
+
+  &.empty
+    display none
+
+#twitchlinks-expand-container
+  display none
+  position absolute
+  top 40px
+  right 0
+  width 340px
+  background-color #fff
+  border 1px solid rgba(0,0,0,.2)
+  z-index 999
+
+  &.expand
+    display block
+
+  .no-content
+    padding 20px
+    text-align center
+    font-style italic
+    color lightgrey
+
+  .title-link
+    display block
+    font-size 14px
+    line-height 1
+    margin 0
+    color PURPLE
+    font-family Georgia
+    font-style italic
+    font-weight bold
+    text-align left
+    flex 1 0 0
+
+  .hide-unless-active
+    display none
+
+    &.active
+      display block
+
+#twitchlinks-top-bar
+  display flex
+  align-items center
+  border-bottom 1px solid lightgrey
+  padding 10px 20px 0 20px
+
+  .views
+    display flex
+    align-items center
+
+    a
+      display block
+      font-size 10px
+      line-height 1
+      flex 0 0 0
+      padding 10px
+      margin 0
+      color lightgrey
+      cursor pointer
+
+      &.active, &:hover
+        color PURPLE
+
+    a + a
+      border-left 1px solid lightgrey
+
+#twitchlinks-bottom-bar
+  display flex
+  align-items center
+  border-top 1px solid lightgrey
+  padding 10px 20px
+
+#twitchlinks-link-list
+  position relative
+  height 400px
+  overflow-y scroll
+  padding 10px 20px
+
+  .link
+    position relative
+    display flex
+    align-content center
+
+    &.saved
+      .controls .unsave-link
+        display block
+
+      .controls .save-link
+        display none
+
+      .go-to-link
+        color darkorange
+
+    &.hidden
+      display none
+
+    .go-to-link
+      position relative
+      padding 10px 0px
+      font-size 12px
+      text-align left
+      flex 1 0 0
+      box-sizing border-box
+      width 100%
+      display flex
+      flex-direction column
+      text-decoration none
+
+      &:hover
+        .url
+          text-decoration underline
+
+    .author
+      font-size 8px
+      line-height 1
+      color grey
+      left 0
+      line-height 1
+
+    .url
+      line-height 1
+      display block
+      width 100%
+      overflow hidden
+      text-overflow ellipsis
+      white-space nowrap
+
+      &:visited
+        color #B68DE6
+
+    .age-bar
+      width 100%
+      height 3px
+      background-color lightgrey
+      margin 3px 0
+
+      .color
+        transform-origin left center
+        width 100%
+        height 100%
+
+    .controls
+      position absolute
+      right 0
+      bottom 6px
+      line-height 1
+      font-size 12px
+
+      .expand-button
+        padding 10px
+        margin -10px
+        position relative
+        z-index 11
+        cursor pointer
+
+      .expanded-options
+        display none
+        background-color #fff
+        flex-direction column
+        box-shadow 1px 1px 4px rgba(0,0,0,.3)
+        position absolute
+        z-index 20
+        right 0
+        width 80px
+        text-align center
+
+        a
+          padding 10px
+          display block
+          cursor pointer
+
+          &:hover
+            text-decoration none
+            color #fff
+            background-color PURPLE
+
+        a + a
+          border-top 1px solid lightgrey
+
+        .unsave-link
+          display none
+
+      &.expanded .expanded-options
+        display flex
+
+#twitchlinks-saved-list, #twitchlinks-hidden-list
+  padding 10px
+
+  .saved-url, .hidden-url
+    position relative
+    display flex
+    align-content center
+    line-height 1
+
+    .remove
+      padding 10px
+      cursor pointer
+
+    .go-to-link
+      position relative
+      padding 10px 0px
+      font-size 12px
+      text-align left
+      flex 1 0 0
+      box-sizing border-box
+      width 0
+      display flex
+      flex-direction column
+      color darkorange
+
+      .url
+        text-overflow ellipsis
+        overflow hidden
+        white-space nowrap
+
+  .hidden-url .go-to-link
+    color red
+
+#twitchlinks-status
+
+  .status
+    display none
+    font-size 10px
+    line-height 1
+
+    i
+      font-size 16px
+
+    .text
+      display inline-block
+      color grey
+      opacity 0
+      transition opacity .5s ease-in-out
+
+    &:hover .text
+      opacity 1
+
+    &.alive i
+      color #65d68a
+
+    &.problems i
+      color orange
+
+    &.dead i
+      color red
+
+    &.show-status
+      display flex
+      align-items center
+
+    i
+      margin-right 10px

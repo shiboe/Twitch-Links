@@ -1,0 +1,49 @@
+{
+  "watch": {
+    "watch:js": {
+      "patterns": [
+        "source/scripts",
+        "source/templates"
+      ],
+      "extensions": "coffee,jade"
+    },
+    "watch:css": {
+      "patterns": [
+        "source/styles"
+      ],
+      "extensions": "styl"
+    }
+  },
+  "scripts": {
+    "watch": "npm-watch",
+    "watch:js": "npm run build:js",
+    "watch:css": "npm run build:css",
+    "build": "npm run build:js && npm run build:css",
+    "build:js": "npm run build:js:content && npm run build:js:background",
+    "build:js:content": "browserify -t browserify-plain-jade -t coffeeify --extension='.coffee' source/scripts/content.coffee > app/scripts/content.js",
+    "build:js:background": "browserify -t browserify-plain-jade -t coffeeify --extension='.coffee' source/scripts/background.coffee > app/scripts/background.js",
+    "build:css": "stylus -u nib -c source/styles/content.styl --out app/styles/content.css",
+    "uglify:js": "npm run uglify:js:content && npm run uglify:js:background",
+    "uglify:js:content": "uglifyjs app/scripts/content.js -o app/scripts/content.js",
+    "uglify:js:background": "uglifyjs app/scripts/background.js -o app/scripts/background.js",
+    "clean": "rimraf npm-debug.log*",
+    "release": "npm run clean && npm run build && npm run uglify:js"
+  },
+  "devDependencies": {
+    "browserify": "^13.0.1",
+    "browserify-plain-jade": "^0.2.2",
+    "coffeeify": "^2.0.1",
+    "hashmark": "^3.1.0",
+    "mkdirp": "^0.5.1",
+    "nib": "^1.1.2",
+    "npm-watch": "^0.1.6",
+    "parallelshell": "^2.0.0",
+    "rimraf": "^2.5.2",
+    "stylus": "^0.54.5",
+    "uglify-js": "^2.6.2"
+  },
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "mustache": "^2.3.0"
+  }
+}
