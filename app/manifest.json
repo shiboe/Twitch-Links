@@ -3,7 +3,7 @@
 
   "name": "Twitch links plugin",
   "description": "Monitor all links in twitch chat and serve them to you in a managable list, so you can stop playing duck hunt in chat spam.",
-  "version": "2.0.0",
+  "version": "2.0.1",
 
   "icons": {
     "48": "images/icon48.png"
