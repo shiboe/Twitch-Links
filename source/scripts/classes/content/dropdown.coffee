@@ -15,14 +15,14 @@ class Dropdown
   build: (linkManager, savedManager, hiddenManager) ->
     if document.readyState isnt 'complete' then return false
 
-    twitchChatHeader = document.querySelector('.chat-header')
-    if !twitchChatHeader then return false
+    twitchChatContainer = document.querySelector('.chat-container')
+    if !twitchChatContainer then return false
 
     container = document.createElement 'div'
     container.id = 'twitchlinks-dropdown'
     container.innerHTML = Mustache.render dropdownTemplate
 
-    twitchChatHeader.appendChild container
+    twitchChatContainer.appendChild container
 
     document.getElementById('twitchlinks-expand-button').addEventListener 'click', (e) =>
       document.getElementById('twitchlinks-expand-container').classList.toggle 'expand'

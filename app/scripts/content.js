@@ -6449,18 +6449,18 @@ Dropdown = (function() {
   };
 
   Dropdown.prototype.build = function(linkManager, savedManager, hiddenManager) {
-    var container, twitchChatHeader;
+    var container, twitchChatContainer;
     if (document.readyState !== 'complete') {
       return false;
     }
-    twitchChatHeader = document.querySelector('.chat-header');
-    if (!twitchChatHeader) {
+    twitchChatContainer = document.querySelector('.chat-container');
+    if (!twitchChatContainer) {
       return false;
     }
     container = document.createElement('div');
     container.id = 'twitchlinks-dropdown';
     container.innerHTML = Mustache.render(dropdownTemplate);
-    twitchChatHeader.appendChild(container);
+    twitchChatContainer.appendChild(container);
     document.getElementById('twitchlinks-expand-button').addEventListener('click', (function(_this) {
       return function(e) {
         return document.getElementById('twitchlinks-expand-container').classList.toggle('expand');
