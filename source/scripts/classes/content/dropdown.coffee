@@ -13,9 +13,10 @@ class Dropdown
     document.getElementById 'twitchlinks-dropdown'
 
   build: (linkManager, savedManager, hiddenManager) ->
+
     if document.readyState isnt 'complete' then return false
 
-    twitchChatContainer = document.querySelector('.chat-container')
+    twitchChatContainer = document.getElementById('right_col')
     if !twitchChatContainer then return false
 
     container = document.createElement 'div'

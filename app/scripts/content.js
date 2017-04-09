@@ -6453,7 +6453,7 @@ Dropdown = (function() {
     if (document.readyState !== 'complete') {
       return false;
     }
-    twitchChatContainer = document.querySelector('.chat-container');
+    twitchChatContainer = document.getElementById('right_col');
     if (!twitchChatContainer) {
       return false;
     }
