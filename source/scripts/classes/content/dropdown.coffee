@@ -14,7 +14,9 @@ class Dropdown
 
   build: (linkManager, savedManager, hiddenManager) ->
 
-    if document.readyState isnt 'complete' then return false
+    if document.readyState isnt 'complete' or
+       document.getElementsByClassName('chat-header').length is 0
+         return false
 
     twitchChatContainer = document.getElementById('right_col')
     if !twitchChatContainer then return false
