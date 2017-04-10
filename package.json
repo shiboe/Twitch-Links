@@ -26,10 +26,12 @@
     "uglify:js": "npm run uglify:js:content && npm run uglify:js:background",
     "uglify:js:content": "uglifyjs app/scripts/content.js -o app/scripts/content.js",
     "uglify:js:background": "uglifyjs app/scripts/background.js -o app/scripts/background.js",
+    "zip": "bestzip app.zip source/*",
     "clean": "rimraf npm-debug.log*",
-    "release": "npm run clean && npm run build && npm run uglify:js"
+    "release": "npm run clean && npm run build && npm run uglify:js && npm run zip"
   },
   "devDependencies": {
+    "bestzip": "^1.1.4",
     "browserify": "^13.0.1",
     "browserify-plain-jade": "^0.2.2",
     "coffeeify": "^2.0.1",

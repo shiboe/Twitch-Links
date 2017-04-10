@@ -8,3 +8,7 @@ node_modules
 
 # OS junk
 .DS_Store
+
+# app compiled builds
+app/scripts/
+app/styles/content.css
