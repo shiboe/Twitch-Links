@@ -13,10 +13,11 @@ class Dropdown
     document.getElementById 'twitchlinks-dropdown'
 
   build: (linkManager, savedManager, hiddenManager) ->
+    liveChat = document.getElementsByClassName('chat-header').length isnt 0
+    replayChat = document.getElementsByClassName('cn-chat-replay-header').length isnt 0
 
-    if document.readyState isnt 'complete' or
-       document.getElementsByClassName('chat-header').length is 0
-         return false
+    if document.readyState isnt 'complete' or !(liveChat or replayChat)
+      return false
 
     twitchChatContainer = document.getElementById('right_col')
     if !twitchChatContainer then return false
