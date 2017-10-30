@@ -31,12 +31,10 @@ savedManager.init storage, linkManager
 hiddenManager.init storage, linkManager
 storage.listen linkManager, savedManager, hiddenManager
 
-
+console.log "TEST"
 
 # main loop
 mainLoop = ->
-  # status checkin so it knows we're still alive
-  status.checkIn()
   # first we make dropdown if it doesn't exist
   if dropdown.exists() or dropdown.build linkManager, savedManager, hiddenManager
     # then we fetch new links
@@ -47,9 +45,14 @@ mainLoop = ->
       .then linkManager.removeDead
       .then linkManager.updateLinksInDOM
       .then dropdown.updateNotifsInDOM
-      .then ->
+      .then status.checkIn
+      .catch ->
+        # do nothing on error
+        return false
+      .finally ->
         # and schedule next
         status.lastTimeout = setTimeout mainLoop, 1000
+
 
   # if everything fails, try again later
   else

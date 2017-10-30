@@ -13,13 +13,13 @@ class Dropdown
     document.getElementById 'twitchlinks-dropdown'
 
   build: (linkManager, savedManager, hiddenManager) ->
-    liveChat = document.getElementsByClassName('chat-header').length isnt 0
-    replayChat = document.getElementsByClassName('cn-chat-replay-header').length isnt 0
+    liveChat = document.getElementsByClassName('chat__header').length isnt 0
+    replayChat = document.getElementsByClassName('video-chat__header').length isnt 0
 
     if document.readyState isnt 'complete' or !(liveChat or replayChat)
       return false
 
-    twitchChatContainer = document.getElementById('right_col')
+    twitchChatContainer = document.querySelector('.right-column')
     if !twitchChatContainer then return false
 
     container = document.createElement 'div'

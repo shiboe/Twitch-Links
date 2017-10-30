@@ -8,21 +8,32 @@ class Reader
     @lastLine = null
 
   fetchNew: (savedManager, hiddenManager) =>
-    # get our twitch line container that we will parse for links, exit if we can't find it
-    chatLines = document.querySelector '.chat-lines'
-    if !chatLines then return
-    # then return a promise of all links in this fetch
+    # return a promise of all links in this fetch
     new Promise (resolve, reject) =>
+      count = 0
+      # get our twitch line container that we will parse for links, exit if we can't find it
+      liveChatLine = document.querySelector '.chat-list__lines .chat-line__message'
+      onDemandChatLine = document.querySelector '.video-chat__message-list-wrapper ul li'
+
+      firstChatLine = liveChatLine or onDemandChatLine
+      # if there's no first line to read, exit, returning no new lines
+      if !firstChatLine
+        reject new Error('no lines found')
+        return
       # start a queue of links that will be returned
       linkQueue = []
       # then establish a looping function that fetches a line and adds it's links to queue
       fetchLineLinks = =>
+        # clear lines if no longer in the DOM so we don't get stuck
+        @lastLine = if @isInDOM @lastLine then @lastLine else null
+        firstChatLine = if @isInDOM firstChatLine then firstChatLine else null
         # first we get the next line, based off the last line checked, so we don't repeat
-        nextLine = if @lastLine and @isInDOM @lastLine then @getNextLine() else @getFirstLine chatLines
+        nextLine = if @lastLine then @getNextLine() else firstChatLine
         # then update the last line to current, so we always move forward
         @lastLine = nextLine or @lastLine
         # while there's a next line
         if nextLine
+          console.log 'nextLine', nextLine
           # get all unique links from the line
           links = @getLinksFromLine nextLine, savedManager, hiddenManager
           # determine which links are not yet queued
@@ -36,7 +47,8 @@ class Reader
           # then move on to the next line
           requestAnimationFrame fetchLineLinks
         # until there is no longer a next line and we have links
-        else resolve linkQueue
+        else
+          resolve linkQueue
       # start reading
       fetchLineLinks()
 
@@ -44,14 +56,11 @@ class Reader
   getNextLine: ->
     @lastLine.nextElementSibling
 
-  getFirstLine: (chatLines) ->
-    if chatLines.children.length then chatLines.children[0] else null
-
   getLinksFromLine: (line, savedManager, hiddenManager) ->
     uniqueUrls = []
 
-    author = line.querySelector('.from')?.innerHTML
-    urls = [].slice.call(line.querySelectorAll('.message a')).map (anchorLink) =>
+    author = line.querySelector('.chat-line__message--username')?.innerHTML
+    urls = [].slice.call(line.querySelectorAll('.chat-line__message--link')).map (anchorLink) =>
       @normalizeUrl anchorLink.getAttribute 'href'
 
     urls.forEach (url) ->
@@ -60,7 +69,7 @@ class Reader
     uniqueUrls.map (url) ->
       isSaved = savedManager.isSaved url
       isHidden = hiddenManager.isHidden url
-      
+
       new Link url, author, isSaved, isHidden
 
   normalizeUrl: (url) ->

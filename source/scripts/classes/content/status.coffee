@@ -5,7 +5,7 @@ class Status
     @fails = 0
     @deadLimit = @config.ageLimit + 1000 # 1 second longer than mainoop
 
-  renderStatus: ->
+  renderStatus: =>
     now = new Date().getTime()
     el = document.getElementById 'twitchlinks-status'
 
@@ -28,9 +28,10 @@ class Status
         clearTimeout @lastTimeout
         @lastTimeout = @mainLoop()
 
-  checkIn: ->
+  checkIn: =>
     @lastCheckin = new Date().getTime()
     @fails = 0
+
 
 
 module.exports = Status

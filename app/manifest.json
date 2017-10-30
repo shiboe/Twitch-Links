@@ -2,19 +2,15 @@
   "manifest_version": 2,
 
   "name": "Twitch Links",
-  "description": "Monitor all links in twitch chat and serve them to you in a managable list, so you can stop playing duck hunt in chat spam.",
-  "version": "2.0.7",
+  "description": "Catch links in fast moving twitch chat, moving them to a managable list for easy clicking!",
+  "version": "3.0.0",
 
   "icons": {
     "48": "images/icon48.png"
   },
 
-  "browser_action": {
-    "default_popup": "popup.html"
-  },
-
   "content_scripts": [{
-    "matches": ["https://www.twitch.tv/*"],
+    "matches": ["https://go.twitch.tv/*"],
     "css": ["styles/content.css", "styles/font-awesome.min.css"],
     "js": ["scripts/content.js"]
   }],
