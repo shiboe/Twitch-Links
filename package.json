@@ -16,19 +16,19 @@
   },
   "scripts": {
     "watch": "npm-watch",
-    "watch:js": "npm run build:js",
-    "watch:css": "npm run build:css",
-    "build": "npm run build:js && npm run build:css",
-    "build:js": "npm run build:js:content && npm run build:js:background",
+    "watch:js": "yarn run build:js",
+    "watch:css": "yarn run build:css",
+    "build": "yarn run build:js && yarn run build:css",
+    "build:js": "yarn run build:js:content && yarn run build:js:background",
     "build:js:content": "browserify -t browserify-plain-jade -t coffeeify --extension='.coffee' source/scripts/content.coffee > app/scripts/content.js",
     "build:js:background": "browserify -t browserify-plain-jade -t coffeeify --extension='.coffee' source/scripts/background.coffee > app/scripts/background.js",
     "build:css": "stylus -u nib -c source/styles/content.styl --out app/styles/content.css",
-    "uglify:js": "npm run uglify:js:content && npm run uglify:js:background",
+    "uglify:js": "yarn run uglify:js:content && yarn run uglify:js:background",
     "uglify:js:content": "uglifyjs app/scripts/content.js -o app/scripts/content.js",
     "uglify:js:background": "uglifyjs app/scripts/background.js -o app/scripts/background.js",
     "zip": "bestzip app.zip app/",
     "clean": "rimraf npm-debug.log*",
-    "release": "npm run clean && npm run build && npm run uglify:js && npm run zip"
+    "release": "yarn run clean && yarn run build && yarn run uglify:js && yarn run zip"
   },
   "devDependencies": {
     "bestzip": "^1.1.4",

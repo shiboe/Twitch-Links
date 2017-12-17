@@ -33,7 +33,6 @@ class Reader
         @lastLine = nextLine or @lastLine
         # while there's a next line
         if nextLine
-          console.log 'nextLine', nextLine
           # get all unique links from the line
           links = @getLinksFromLine nextLine, savedManager, hiddenManager
           # determine which links are not yet queued
@@ -48,6 +47,7 @@ class Reader
           requestAnimationFrame fetchLineLinks
         # until there is no longer a next line and we have links
         else
+          if window.twitchlinksDebug == true then console.log 'resolving new links', linkQueue
           resolve linkQueue
       # start reading
       fetchLineLinks()
@@ -59,9 +59,13 @@ class Reader
   getLinksFromLine: (line, savedManager, hiddenManager) ->
     uniqueUrls = []
 
-    author = line.querySelector('.chat-line__message--username')?.innerHTML
+    author = line.querySelector('.chat-author__display-name')?.innerHTML
     urls = [].slice.call(line.querySelectorAll('.chat-line__message--link')).map (anchorLink) =>
       @normalizeUrl anchorLink.getAttribute 'href'
+
+    # also check for clips
+    clip = line.querySelector('.chat-card__link')
+    if clip then urls.push( @normalizeUrl clip.getAttribute('href').split('?')[0] )
 
     urls.forEach (url) ->
       if uniqueUrls.indexOf(url) is -1 then uniqueUrls.push url

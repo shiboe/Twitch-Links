@@ -3,14 +3,14 @@
 
   "name": "Twitch Links",
   "description": "Catch links in fast moving twitch chat, moving them to a managable list for easy clicking!",
-  "version": "3.0.0",
+  "version": "3.1.0",
 
   "icons": {
     "48": "images/icon48.png"
   },
 
   "content_scripts": [{
-    "matches": ["https://go.twitch.tv/*"],
+    "matches": ["https://go.twitch.tv/*", "https://www.twitch.tv/*"],
     "css": ["styles/content.css", "styles/font-awesome.min.css"],
     "js": ["scripts/content.js"]
   }],

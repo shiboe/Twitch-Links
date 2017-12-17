@@ -10,17 +10,34 @@ class Dropdown
     @expanded = !@expanded
 
   exists: ->
-    document.getElementById 'twitchlinks-dropdown'
+    exists = document.getElementById 'twitchlinks-dropdown'
+
+    if !exists and window.twitchlinksDebug == true
+      console.log "Twitchlinks dropdown does not exist"
+
+    return exists
 
   build: (linkManager, savedManager, hiddenManager) ->
-    liveChat = document.getElementsByClassName('chat__header').length isnt 0
-    replayChat = document.getElementsByClassName('video-chat__header').length isnt 0
+    liveChatSelector = '.chat-room__header'
+    replayChatSelector = 'video-chat__header'
+    twitchChatContainerSelector = '.right-column'
 
-    if document.readyState isnt 'complete' or !(liveChat or replayChat)
+    liveChat = document.querySelector(liveChatSelector)
+    replayChat = document.getElementsByClassName(replayChatSelector).length isnt 0
+
+    if document.readyState isnt 'complete'
+      if window.twitchlinksDebug == true then console.log "document readystate not `complete`"
       return false
 
-    twitchChatContainer = document.querySelector('.right-column')
-    if !twitchChatContainer then return false
+    if !(liveChat or replayChat)
+      if !liveChat and window.twitchlinksDebug == true then console.log "could not bind to liveChat as #{liveChatSelector}"
+      if !replayChat and window.twitchlinksDebug == true then console.log "could not bind to replayChat as #{replayChatSelector}"
+      return false
+
+    twitchChatContainer = document.querySelector(twitchChatContainerSelector)
+    if !twitchChatContainer
+      if window.twitchlinksDebug == true then console.log "could not bind to twitch chat container as #{twitchChatContainerSelector}"
+      return false
 
     container = document.createElement 'div'
     container.id = 'twitchlinks-dropdown'

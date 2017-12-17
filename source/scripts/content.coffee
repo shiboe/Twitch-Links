@@ -31,7 +31,10 @@ savedManager.init storage, linkManager
 hiddenManager.init storage, linkManager
 storage.listen linkManager, savedManager, hiddenManager
 
-console.log "TEST"
+
+if window.location.search.indexOf("twitchlinks=debug") >= 0
+  console.log "Twitchlinks initialized"
+  window.twitchlinksDebug = true
 
 # main loop
 mainLoop = ->
@@ -46,8 +49,9 @@ mainLoop = ->
       .then linkManager.updateLinksInDOM
       .then dropdown.updateNotifsInDOM
       .then status.checkIn
-      .catch ->
+      .catch (e) ->
         # do nothing on error
+        if window.twitchlinksDebug == true then console.log "error in mainLoop", e
         return false
       .finally ->
         # and schedule next
@@ -56,6 +60,7 @@ mainLoop = ->
 
   # if everything fails, try again later
   else
+    if window.twitchlinksDebug == true then console.log "Failed to exist and couldn't build"
     status.lastTimeout = setTimeout mainLoop, 1000
 
 
