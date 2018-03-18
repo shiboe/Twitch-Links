@@ -3,7 +3,7 @@
 
   "name": "Twitch Links",
   "description": "Catch links in fast moving twitch chat, moving them to a managable list for easy clicking!",
-  "version": "3.1.0",
+  "version": "3.2.0",
 
   "icons": {
     "48": "images/icon48.png"
