@@ -18,9 +18,11 @@ class Dropdown
     return exists
 
   build: (linkManager, savedManager, hiddenManager) ->
-    liveChatSelector = '.chat-room__header'
-    replayChatSelector = 'video-chat__header'
-    twitchChatContainerSelector = '.right-column'
+    if window.twitchlinksDebug == true then console.log "building dropdown..."
+
+    liveChatSelector = '.chat-list__lines'
+    replayChatSelector = '.video-chat__message-list-wrapper'
+    twitchChatContainerSelector = '.room-selector__header'
 
     liveChat = document.querySelector(liveChatSelector)
     replayChat = document.getElementsByClassName(replayChatSelector).length isnt 0
