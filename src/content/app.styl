@@ -38,7 +38,7 @@ POP_EASING = cubic-bezier(0.075, 0.82, 0.165, 1)
   .copy-confirm
     animation-timing-function ease-out
     animation-fill-mode forwards
-    animation-duration .4s
+    animation-duration .5s
     position absolute
     left 50%
     top 50%
@@ -65,14 +65,31 @@ POP_EASING = cubic-bezier(0.075, 0.82, 0.165, 1)
 
   .header-container
     display flex
-    padding 14px 20px
+    padding 13px 20px
     border-bottom 1px solid rgba(0,0,0,.2)
     background-color #fff
+    align-items center
+
+    .nav-menu
+      display flex
+      margin-right -10px
+
+      a
+        padding 4px 10px
+        display flex
+        font-size 10px
+
+        & + a
+          border-left 1px solid lightgrey
+
 
   .footer-container
     display flex
-    padding 14px 20px
+    padding 12px 20px
     border-top 1px solid rgba(0,0,0,.2)
+
+    .issues
+      flex-grow 1
 
   .header-logo
     display block

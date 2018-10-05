@@ -97,7 +97,7 @@ export class LinkActionsComponent extends React.Component <Props, State> {
             copied: false
           }
         });
-      }, 400);
+      }, 500);
 
       return {
         copied: true

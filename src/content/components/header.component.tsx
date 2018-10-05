@@ -8,8 +8,26 @@ export class HeaderComponent extends React.Component <{}> {
   render() {
     return (
       <header className="header-container">
-        <h1 className="header-logo">Twitchlinks</h1>
+        <h1 className="header-logo">Twitch Links</h1>
+
+        <div className="nav-menu">
+          <a onClick={ () => this.viewAll() }>all</a>
+          <a onClick={ () => this.viewSaved() }>saved</a>
+          <a onClick={ () => this.viewHidden() }>hidden</a>
+        </div>
       </header>
     );
+  }
+
+  viewAll() {
+
+  }
+
+  viewSaved() {
+
+  }
+
+  viewHidden() {
+
   }
 }
