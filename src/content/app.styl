@@ -1,0 +1,207 @@
+@import 'nib'
+
+PURPLE = #6441a4
+POP_EASING = cubic-bezier(0.075, 0.82, 0.165, 1)
+
+#twitchlinks-root
+  position fixed
+  display flex
+  z-index 10000
+  width 340px
+  top 50px
+  right 0
+  bottom 0
+  border-left 1px solid lightgrey
+  box-shadow 0 4px 4px rgba(100,0,100, .2)
+  transform translate(400px,0)
+  opacity 0
+  background #fff
+  animation-timing-function POP_EASING
+  animation-duration .3s
+  background-color #efeef1
+
+  .fas
+    margin-right 6px
+    margin-top 1px
+    text-decoration none !important
+
+  &.showing
+    animation-name appear
+    transform translate(0,0)
+    opacity 1
+
+  .twitchlinks-overlay
+    display flex
+    flex-direction column
+    flex-grow 1
+
+  .copy-confirm
+    animation-timing-function ease-out
+    animation-fill-mode forwards
+    animation-duration .4s
+    position absolute
+    left 50%
+    top 50%
+    height 60px
+    width 60px
+    margin-left -30px
+    margin-top -30px
+    display flex
+    font-size 36px
+    border 3px solid
+    border-radius 50%
+    align-items center
+    text-align center
+    justify-content center
+    color PURPLE
+    transform translateX(9999px)
+
+    .fas
+      margin 0
+
+    &.show
+      transform translateX(0px)
+      animation-name pop-copy-confirm
+
+  .header-container
+    display flex
+    padding 14px 20px
+    border-bottom 1px solid rgba(0,0,0,.2)
+    background-color #fff
+
+  .footer-container
+    display flex
+    padding 14px 20px
+    border-top 1px solid rgba(0,0,0,.2)
+
+  .header-logo
+    display block
+    font-size 20px
+    line-height 1
+    margin 0
+    color PURPLE
+    font-family Georgia
+    font-style italic
+    font-weight bold
+    text-align left
+    flex 1 0 0
+
+  .link-list-container
+    display flex
+    flex-direction column
+    flex-grow 1
+    overflow scroll
+    padding-bottom 20px
+
+  .link-list
+    display flex
+    flex-direction column
+    padding 8px 0
+    flex-shrink 0
+
+    &.hidden
+      .path a
+      .posted-ago
+        color lightgrey !important
+
+      .expires-bar .progress
+        background-color darkgrey !important
+
+  .update-links
+    padding-top 10px
+    text-align center
+
+    a
+      font-size 10px
+      cursor pointer
+      display inline-flex
+      align-items center
+
+    a:not(.update-available)
+      cursor default
+      text-decoration none !important
+      color lightgrey !important
+
+  .link-container
+    display grid
+    padding 6px 20px
+    line-height 1.2
+    grid-template-columns 1fr auto
+    grid-tmeplate-rows auto auto auto
+
+    .posted-ago
+      font-size 10px
+      line-height 1
+      color grey
+      grid-column 1 / span 1
+      grid-row 3 / span 1
+
+    .path
+      display flex
+      grid-column 1 / span 2
+      grid-row 1 / span 1
+      align-items flex-end
+
+      a
+        font-size 12px
+        max-width 100%
+        overflow hidden
+        text-overflow ellipsis
+        white-space nowrap
+
+        &:visited
+          color rgb(153,128,158)
+
+    .expires-bar
+      grid-column 1 / span 2
+      grid-row 2 / span 1
+      height 2px
+      background-color lightgrey
+      margin 4px 0
+
+      .progress
+        height 100%
+
+    .actions
+      display flex
+      grid-column 2 / span 1
+      grid-row 3 / span 1
+      margin-right -4px
+
+      .action
+        display flex
+        font-size 10px
+        line-height 1
+        padding 0 4px
+        cursor pointer
+        align-items center
+        opacity 0
+        transition opacity .5s POP_EASING
+        transform translateX(300px)
+
+    &:hover
+      .actions .action
+        transform translateX(0px)
+        opacity 1
+
+
+@keyframes appear
+  0%
+    transform translate(100px, 0)
+    opacity .2
+  100%
+    transform translate(0,0)
+    opacity 1
+
+@keyframes pop-copy-confirm
+  0%
+    transform scale(1)
+    opacity 1
+
+  25%
+    transform scale(.8)
+    opacity 1
+
+  100%
+    transform scale(3)
+    opacity 0

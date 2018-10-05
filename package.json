@@ -1,51 +1,30 @@
 {
-  "watch": {
-    "watch:js": {
-      "patterns": [
-        "source/scripts",
-        "source/templates"
-      ],
-      "extensions": "coffee,jade"
-    },
-    "watch:css": {
-      "patterns": [
-        "source/styles"
-      ],
-      "extensions": "styl"
-    }
-  },
+  "name": "twitchlinks",
+  "version": "3.0.0",
+  "repository": "https://github.com/shiboe/TwitchLinks.git",
+  "author": "Stephen Cave <sccave@gmail.com>",
+  "license": "MIT",
   "scripts": {
-    "watch": "npm-watch",
-    "watch:js": "yarn run build:js",
-    "watch:css": "yarn run build:css",
-    "build": "yarn run build:js && yarn run build:css",
-    "build:js": "yarn run build:js:content && yarn run build:js:background",
-    "build:js:content": "browserify -t browserify-plain-jade -t coffeeify --extension='.coffee' source/scripts/content.coffee > app/scripts/content.js",
-    "build:js:background": "browserify -t browserify-plain-jade -t coffeeify --extension='.coffee' source/scripts/background.coffee > app/scripts/background.js",
-    "build:css": "stylus -u nib -c source/styles/content.styl --out app/styles/content.css",
-    "uglify:js": "yarn run uglify:js:content && yarn run uglify:js:background",
-    "uglify:js:content": "uglifyjs app/scripts/content.js -o app/scripts/content.js",
-    "uglify:js:background": "uglifyjs app/scripts/background.js -o app/scripts/background.js",
-    "zip": "bestzip app.zip app/",
-    "clean": "rimraf npm-debug.log*",
-    "release": "yarn run clean && yarn run build && yarn run uglify:js && yarn run zip"
+    "build-css": "stylus src/content/app.styl --out app/styles/content.min.css --compress --use nib",
+    "build-js": "webpack --mode=production"
   },
   "devDependencies": {
     "bestzip": "^1.1.4",
-    "browserify": "^13.0.1",
-    "browserify-plain-jade": "^0.2.2",
-    "coffeeify": "^2.0.1",
-    "hashmark": "^3.1.0",
     "mkdirp": "^0.5.1",
     "nib": "^1.1.2",
-    "npm-watch": "^0.1.6",
-    "parallelshell": "^2.0.0",
     "rimraf": "^2.5.2",
-    "stylus": "^0.54.5",
-    "uglify-js": "^2.6.2"
+    "stylus": "^0.54.5"
   },
   "dependencies": {
-    "bluebird": "^3.4.6",
-    "mustache": "^2.3.0"
+    "@types/chrome": "^0.0.74",
+    "@types/react": "^16.4.6",
+    "@types/react-dom": "^16.0.6",
+    "moment": "^2.22.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "ts-loader": "^4.4.2",
+    "typescript": "^2.9.2",
+    "webpack": "^4.14.0",
+    "webpack-cli": "^3.0.8"
   }
 }

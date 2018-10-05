@@ -9,18 +9,24 @@
     "48": "images/icon48.png"
   },
 
+  "browser_action": {},
+
   "content_scripts": [{
     "matches": ["https://go.twitch.tv/*", "https://www.twitch.tv/*"],
-    "css": ["styles/content.css", "styles/font-awesome.min.css"],
+    "css": ["styles/content.min.css"],
     "js": ["scripts/content.js"]
   }],
 
-  "web_accessible_resources": [
-    "fonts/*.*"
-  ],
+  "background": {
+    "scripts" : ["scripts/background.js"]
+  },
+
+  "web_accessible_resources": [],
 
   "permissions": [
    "activeTab",
-   "storage"
+   "storage",
+   "background",
+   "tabs"
    ]
 }
