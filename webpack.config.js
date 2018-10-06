@@ -8,7 +8,7 @@ var config = {
   },
   output: {
     path: path.resolve(__dirname, "app/scripts"),
-    filename: "[name].js"
+    filename: "[name].min.js"
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js"]

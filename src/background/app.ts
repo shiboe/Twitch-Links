@@ -7,38 +7,53 @@ var showing: number;
 // take actions when recieving messages from content
 chrome.runtime.onMessage.addListener((message, sender, handler) => {
   let force = false;
+  let unpop = false;
 
-  if (message && message.type == 'addLinks') {
-    linkManager.add(message.links, message.streamer);
-  }
+  if (message) {
+    switch (message.type) {
 
-  if (message && message.type == 'hideLink') {
-    linkManager.hide(message.link);
-    force = true;
-  }
+      case 'addLinks':
+        linkManager.add(message.links, message.streamer);
+        break;
 
-  if (message && message.type == 'unHideLink') {
-    linkManager.unHide(message.link);
-    force = true;
-  }
+      case 'hideLink':
+        linkManager.hide(message.link);
+        force = true;
+        break;
 
-  if (message && message.type == 'saveLink') {
-    linkManager.save(message.link);
-  }
+      case 'unHideLink':
+        linkManager.unHide(message.link);
+        force = true;
+        break;
 
-  if (message && message.type == 'unSaveLink') {
-    linkManager.unSave(message.link);
+      case 'saveLink':
+        linkManager.save(message.link);
+        force = true;
+        break;
+
+      case 'unSaveLink':
+        linkManager.unSave(message.link);
+        force = true;
+        break;
+
+      case 'unPopOverlay':
+        showing = null;
+        return;
+    }
   }
 
   const activeTab = new ActiveTab(sender.tab);
 
   if (activeTab.twitch && activeTab.streamer) {
     const links = linkManager.getLinks(activeTab.streamer);
+    const showTab = message && message.type.indexOf('show') === 0;
 
     chrome.tabs.sendMessage(sender.tab.id, {
-      type: 'updateLinks',
+      type: showTab ? message.type : 'updateLinks',
       links: links,
-      force: force
+      force: force,
+      saved: linkManager.getSaved(),
+      hidden: linkManager.getHidden()
     });
 
     chrome.browserAction.setBadgeText({
@@ -74,14 +89,14 @@ chrome.browserAction.onClicked.addListener((tab: chrome.tabs.Tab) => {
   const wasShowing = showing;
 
   if (showing) {
-    chrome.tabs.sendMessage(showing, {type: 'hideLinks'});
+    chrome.tabs.sendMessage(showing, {type: 'unpopOverlay'});
     showing = null;
   }
 
   if (activeTab.twitch && activeTab.streamer && activeTab.id !== wasShowing) {
     showing = activeTab.id;
     chrome.tabs.sendMessage(activeTab.id, {
-      type: 'showLinks',
+      type: 'popOverlay',
       links: linkManager.getLinks(activeTab.streamer)
     });
   }

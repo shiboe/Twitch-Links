@@ -1,6 +1,7 @@
 @import 'nib'
 
 PURPLE = #6441a4
+GREY = rgb(150,150,150)
 POP_EASING = cubic-bezier(0.075, 0.82, 0.165, 1)
 
 #twitchlinks-root
@@ -77,11 +78,19 @@ POP_EASING = cubic-bezier(0.075, 0.82, 0.165, 1)
       a
         padding 4px 10px
         display flex
-        font-size 10px
+        cursor pointer
 
         & + a
           border-left 1px solid lightgrey
 
+  .empty
+    flex-grow 1
+    padding 30px
+    text-align center
+    color GREY
+
+  .all .empty
+    padding-top 10px
 
   .footer-container
     display flex
@@ -90,6 +99,9 @@ POP_EASING = cubic-bezier(0.075, 0.82, 0.165, 1)
 
     .issues
       flex-grow 1
+
+    .test
+      cursor pointer
 
   .header-logo
     display block
@@ -102,6 +114,17 @@ POP_EASING = cubic-bezier(0.075, 0.82, 0.165, 1)
     font-weight bold
     text-align left
     flex 1 0 0
+
+  .content-container
+    display flex
+    flex-direction column
+    flex-grow 1
+
+    &.hidden .link-list.hidden .path a
+      color GREY !important;
+
+    &.saved .expires-bar
+      background-color PURPLE !important;
 
   .link-list-container
     display flex
@@ -129,7 +152,6 @@ POP_EASING = cubic-bezier(0.075, 0.82, 0.165, 1)
     text-align center
 
     a
-      font-size 10px
       cursor pointer
       display inline-flex
       align-items center
@@ -147,9 +169,8 @@ POP_EASING = cubic-bezier(0.075, 0.82, 0.165, 1)
     grid-tmeplate-rows auto auto auto
 
     .posted-ago
-      font-size 10px
       line-height 1
-      color grey
+      color GREY
       grid-column 1 / span 1
       grid-row 3 / span 1
 
@@ -160,7 +181,6 @@ POP_EASING = cubic-bezier(0.075, 0.82, 0.165, 1)
       align-items flex-end
 
       a
-        font-size 12px
         max-width 100%
         overflow hidden
         text-overflow ellipsis
@@ -187,7 +207,6 @@ POP_EASING = cubic-bezier(0.075, 0.82, 0.165, 1)
 
       .action
         display flex
-        font-size 10px
         line-height 1
         padding 0 4px
         cursor pointer

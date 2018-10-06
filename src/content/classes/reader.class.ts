@@ -34,7 +34,6 @@ export class Reader {
     // if the last message is no longer available, clear it because not usable
     if (this.lastMessage && !this.isInDom(this.lastMessage)) {
       this.lastMessage = null;
-      console.log('last message isnt in dom, removing')
     }
 
     // then get the next message if we have a usable one, or first message
@@ -66,7 +65,6 @@ export class Reader {
       if (links.length) {
         messenger.addLinks(links);
         window.test.push(links);
-        console.log('save links', links)
       }
     }
   }

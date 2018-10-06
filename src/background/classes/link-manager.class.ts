@@ -48,7 +48,6 @@ export class LinkManager {
     this.removeOldLinks();
 
     if (this.streamerLinks[streamer]) {
-      console.log('streamer', streamer, this.streamerLinks[streamer])
       return Object.keys(this.streamerLinks[streamer]).map((url) => {
         return {
           url: url,
@@ -60,6 +59,14 @@ export class LinkManager {
     } else {
       return [];
     }
+  }
+
+  getSaved() {
+    return this.savedLinks;
+  }
+
+  getHidden() {
+    return this.hiddenLinks;
   }
 
   getLinkCount(streamer: string) {

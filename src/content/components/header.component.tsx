@@ -1,5 +1,7 @@
 import * as React from "react";
 
+import { messenger } from '../classes/messenger.class';
+
 export class HeaderComponent extends React.Component <{}> {
   constructor(props) {
     super(props);
@@ -20,14 +22,14 @@ export class HeaderComponent extends React.Component <{}> {
   }
 
   viewAll() {
-
+    messenger.showAll();
   }
 
   viewSaved() {
-
+    messenger.showSaved();
   }
 
   viewHidden() {
-
+    messenger.showHidden();
   }
 }

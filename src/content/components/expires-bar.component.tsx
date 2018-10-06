@@ -1,7 +1,7 @@
 import * as React from "react";
 
 interface Props {
-  fill: number
+  fill?: number
 }
 
 export class ExpiresBarComponent extends React.Component <Props, {}> {
@@ -16,6 +16,7 @@ export class ExpiresBarComponent extends React.Component <Props, {}> {
   }
 
   styles(fill) {
+    if (!fill) return {};
     const percent = 100 - (fill * 100);
 
     return {

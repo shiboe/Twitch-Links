@@ -14,11 +14,11 @@
   "content_scripts": [{
     "matches": ["https://go.twitch.tv/*", "https://www.twitch.tv/*"],
     "css": ["styles/content.min.css"],
-    "js": ["scripts/content.js"]
+    "js": ["scripts/content.min.js"]
   }],
 
   "background": {
-    "scripts" : ["scripts/background.js"]
+    "scripts" : ["scripts/background.min.js"]
   },
 
   "web_accessible_resources": [],

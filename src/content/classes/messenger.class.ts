@@ -50,5 +50,21 @@ export const messenger = {
       type: 'unSaveLink',
       link: link
     });
+  },
+
+  showAll() {
+    sendMessage({ type: 'showAll' });
+  },
+
+  showSaved() {
+    sendMessage({ type: 'showSaved' });
+  },
+
+  showHidden() {
+    sendMessage({ type: 'showHidden' });
+  },
+
+  unPopOverlay() {
+    sendMessage({ type: 'unPopOverlay' });
   }
 }

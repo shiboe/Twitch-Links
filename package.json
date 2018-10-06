@@ -6,7 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build-css": "stylus src/content/app.styl --out app/styles/content.min.css --compress --use nib",
-    "build-js": "webpack --mode=production"
+    "build-js": "webpack --mode=production",
+    "zip": "bestzip app.zip app/"
   },
   "devDependencies": {
     "bestzip": "^1.1.4",
