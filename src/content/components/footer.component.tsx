@@ -24,12 +24,8 @@ export class FooterComponent extends React.Component <{}> {
   }
 
   test() {
-    const links = [
-      `https://www.youtube.com/watch?v=6n3pFFPSlW4`,
-      `https://en.wikipedia.org/wiki/Meme`,
-      `https://github.com/shiboe/Twitch-Links`
-    ];
-
+    const rand = Math.floor(Math.random()*1000);
+    const links = [`https://www.testlink.com/${rand}`];
     messenger.addLinks(links);
   }
 }

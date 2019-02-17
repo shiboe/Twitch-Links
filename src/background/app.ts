@@ -1,5 +1,5 @@
 import { LinkManager } from './classes/link-manager.class';
-import { ActiveTab } from './classes/active-tab';
+import { Tab } from './classes/tab';
 
 const linkManager = new LinkManager();
 var showing: number;
@@ -42,10 +42,10 @@ chrome.runtime.onMessage.addListener((message, sender, handler) => {
     }
   }
 
-  const activeTab = new ActiveTab(sender.tab);
+  const sendingTab = new Tab(sender.tab);
 
-  if (activeTab.twitch && activeTab.streamer) {
-    const links = linkManager.getLinks(activeTab.streamer);
+  if (sendingTab.twitch && sendingTab.streamer) {
+    const links = linkManager.getLinks(sendingTab.streamer);
     const showTab = message && message.type.indexOf('show') === 0;
 
     chrome.tabs.sendMessage(sender.tab.id, {
@@ -56,9 +56,11 @@ chrome.runtime.onMessage.addListener((message, sender, handler) => {
       hidden: linkManager.getHidden()
     });
 
-    chrome.browserAction.setBadgeText({
-      text: links.length.toString()
-    });
+    if (sendingTab.isActive()) {
+      chrome.browserAction.setBadgeText({
+        text: links.length.toString()
+      });
+    }
   }
 });
 
@@ -66,7 +68,7 @@ chrome.runtime.onMessage.addListener((message, sender, handler) => {
 chrome.tabs.onActivated
   .addListener(function(activeInfo: chrome.tabs.TabActiveInfo) {
     chrome.tabs.get(activeInfo.tabId, (tab: chrome.tabs.Tab) => {
-      const activeTab = new ActiveTab(tab);
+      const activeTab = new Tab(tab);
       let badgeText = '';
 
       if (activeTab.twitch && activeTab.streamer) {
@@ -85,7 +87,7 @@ chrome.tabs.onActivated
 
 // hide/show links on an active streamer tab when icon clicked
 chrome.browserAction.onClicked.addListener((tab: chrome.tabs.Tab) => {
-  const activeTab = new ActiveTab(tab);
+  const activeTab = new Tab(tab);
   const wasShowing = showing;
 
   if (showing) {

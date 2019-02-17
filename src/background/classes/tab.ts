@@ -1,4 +1,4 @@
-export class ActiveTab {
+export class Tab {
   private tab: chrome.tabs.Tab;
 
   id: number;
@@ -26,5 +26,9 @@ export class ActiveTab {
   private getStreamer(url: string) {
     const urlParts = url.split('/');
     return urlParts.length >= 4 ? urlParts[3] : null;
+  }
+
+  public isActive() {
+    return this.tab.active;
   }
 }
