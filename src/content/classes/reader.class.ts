@@ -55,6 +55,7 @@ export class Reader {
   saveMessages(messages: Element[]) {
     if (messages.length) {
       this.lastMessage = messages[messages.length - 1];
+
       let links = messages
         .map((message) => this.getLinksFromMessage(message))
         .reduce((result, current) => {
@@ -70,7 +71,12 @@ export class Reader {
   }
 
   getNextMessage(message: Element): Element {
-    return message.nextElementSibling;
+    const next = message.nextElementSibling;
+    const valid = messageSelectors.filter((selector) => {
+      return next && next.classList.contains(selector.substr(1));
+    });
+
+    return valid.length ? next : null;
   }
 
   getFirstMessage(): Element {
