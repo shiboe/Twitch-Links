@@ -10,7 +10,7 @@
     "zip": "bestzip app.zip app/"
   },
   "devDependencies": {
-    "bestzip": "^1.1.4",
+    "bestzip": "^2.1.7",
     "mkdirp": "^0.5.1",
     "nib": "^1.1.2",
     "rimraf": "^2.5.2",
